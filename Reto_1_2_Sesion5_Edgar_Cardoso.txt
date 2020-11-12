@@ -1,0 +1,83 @@
+## Reto 1
+
+### 1.
+# Requires the PyMongo package.
+# https://api.mongodb.com/python/current
+
+client = MongoClient('mongodb+srv://beduEDCO:osodrac@beduedgarcardoso.k9u6r.mongodb.net/test?authSource=admin&replicaSet=atlas-gur2j5-shard-0&connectTimeoutMS=600000&socketTimeoutMS=6000000&readPreference=primary&appname=MongoDB%20Compass&ssl=true')
+filter={
+    'house_rules': re.compile(r" No Parties (?i)")
+}
+
+result = client['sample_airbnb']['listingsAndReviews'].find(
+  filter=filter
+)
+
+### 2.
+
+# Requires the PyMongo package.
+# https://api.mongodb.com/python/current
+
+client = MongoClient('mongodb+srv://beduEDCO:osodrac@beduedgarcardoso.k9u6r.mongodb.net/test?authSource=admin&replicaSet=atlas-gur2j5-shard-0&connectTimeoutMS=600000&socketTimeoutMS=6000000&readPreference=primary&appname=MongoDB%20Compass&ssl=true')
+filter={
+    'house_rules': re.compile(r" pets allowed (?i)")
+}
+
+result = client['sample_airbnb']['listingsAndReviews'].find(
+  filter=filter
+)
+
+### 3.
+# Requires the PyMongo package.
+# https://api.mongodb.com/python/current
+
+client = MongoClient('mongodb+srv://beduEDCO:osodrac@beduedgarcardoso.k9u6r.mongodb.net/test?authSource=admin&replicaSet=atlas-gur2j5-shard-0&connectTimeoutMS=600000&socketTimeoutMS=6000000&readPreference=primary&appname=MongoDB%20Compass&ssl=true')
+filter={
+    'house_rules': re.compile(r"no smoking(?i)")
+}
+
+result = client['sample_airbnb']['listingsAndReviews'].find(
+  filter=filter
+)
+
+
+### 4.
+
+# Requires the PyMongo package.
+# https://api.mongodb.com/python/current
+
+client = MongoClient('mongodb+srv://beduEDCO:osodrac@beduedgarcardoso.k9u6r.mongodb.net/test?authSource=admin&replicaSet=atlas-gur2j5-shard-0&connectTimeoutMS=600000&socketTimeoutMS=6000000&readPreference=primary&appname=MongoDB%20Compass&ssl=true')
+filter={
+    'house_rules': re.compile(r" no smoking | no parties (?i)")
+}
+
+result = client['sample_airbnb']['listingsAndReviews'].find(
+  filter=filter
+)
+
+
+
+## Reto 2
+
+# Requires the PyMongo package.
+# https://api.mongodb.com/python/current
+
+client = MongoClient('mongodb+srv://beduEDCO:osodrac@beduedgarcardoso.k9u6r.mongodb.net/test?authSource=admin&replicaSet=atlas-gur2j5-shard-0&connectTimeoutMS=600000&socketTimeoutMS=6000000&readPreference=primary&appname=MongoDB%20Compass&ssl=true')
+filter={
+    'number_of_reviews': {
+        '$gte': 50
+    }, 
+    'review_scores.review_scores_rating': {
+        '$gte': 80
+    }, 
+    'amenities': {
+        '$in': [
+            re.compile(r"Ethernet")
+        ]
+    }, 
+    'address.country_code': 'BR'
+}
+
+result = client['sample_airbnb']['listingsAndReviews'].find(
+  filter=filter
+)
