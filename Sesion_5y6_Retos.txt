@@ -1,0 +1,54 @@
+# Edgar Cardoso Olvera
+#Sesión 5, Reto 3
+
+[{$match: {
+  property_type: 'House',
+  amenities: {$in: ["Wifi", "Ethernet"]}
+}}, {$group: {
+  _id: null,
+  total: {
+    $sum: 1
+  }
+}}]
+
+
+
+## Sesion 6, Reto 1
+
+[{$match: {
+  property_type: 'House',
+  bedrooms: {$gte: 1}
+}}, {$addFields: {
+  cost_prom: {$divide: ["$price", "$bedrooms"]}
+}}, {$group: {
+  _id: "$address.country",
+  recamaras :{
+    $sum: 1
+  },
+  total: {
+    $sum: "$cost_prom"
+  }
+}}, {$addFields: {
+  costo_promedio_room: {$divide: ["$total","$recamaras"]}
+}}, {$project: {
+  id_: 1,
+  costo_promedio_room: 1
+}}]
+
+## Sesion 6, Reto 2
+
+[{$lookup: {
+  from: 'users',
+  localField: 'email',
+  foreignField: 'email',
+  as: 'users'
+}}, {$addFields: {
+  user_object: {$arrayElemAt: ["$users", 0]}
+}}, {$addFields: {
+  usuario_pass: "$user_object.password"
+}}, {$project: {
+  _id:0,
+  email: 1,
+  usuario_pass: 1
+}}]
+
